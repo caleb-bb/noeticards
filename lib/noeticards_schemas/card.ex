@@ -23,5 +23,6 @@ defmodule NoeticardsSchemas.Card do
     card
     |> cast(attrs, required)
     |> validate_required(required)
+    |> assoc_constraint(:deck)
   end
 end
