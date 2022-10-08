@@ -1,39 +1,40 @@
-<h1>Listing Decks</h1>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
-<%= if @live_action in [:new, :edit] do %>
-  <.modal return_to={Routes.deck_index_path(@socket, :index)}>
-    <.live_component
-      module={NoeticardsWeb.DeckLive.FormComponent}
-      id={@deck.id || :new}
-      title={@page_title}
-      action={@live_action}
-      deck={@deck}
-      return_to={Routes.deck_index_path(@socket, :index)}
-    />
-  </.modal>
-<% end %>
+<html>
+<head>
+  <title></title>
+</head>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
+<body>
+  <h1>Listing
+  Decks</h1><%= if @live_action in [:new, :edit] do %>&lt;.modal
+  return_to={Routes.deck_index_path(@socket, :index)}&gt;
+  &lt;.live_component module={NoeticardsWeb.DeckLive.FormComponent}
+  id={@deck.id || :new} title={@page_title} action={@live_action}
+  deck={@deck} return_to={Routes.deck_index_path(@socket, :index)}
+  /&gt; &lt;/.modal&gt; <% end %>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody id="decks">
-    <%= for deck <- @decks do %>
-      <tr id={"deck-#{deck.id}"}>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody id="decks">
+      <%= for deck <- @decks do %>
+
+      <tr id="{&quot;deck-#{deck.id}&quot;}">
         <td><%= deck.name %></td>
 
         <td>
-          <span><%= live_redirect "Show", to: Routes.deck_show_path(@socket, :show, deck) %></span>
-          <span><%= live_patch "Edit", to: Routes.deck_index_path(@socket, :edit, deck) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: deck.id, data: [confirm: "Are you sure?"] %></span>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<span><%= live_patch "New Deck", to: Routes.deck_index_path(@socket, :new) %></span>
+        <span><%= live_redirect "Show", to: Routes.deck_show_path(@socket, :show, deck) %></span>
+        <span><%= live_patch "Edit", to: Routes.deck_index_path(@socket, :edit, deck) %></span>
+        <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: deck.id, data: [confirm: "Are you sure?"] %></span></td>
+      </tr><% end %>
+    </tbody>
+  </table><span><%= live_patch "New Deck", to: Routes.deck_index_path(@socket, :new) %></span>
+</body>
+</html>
