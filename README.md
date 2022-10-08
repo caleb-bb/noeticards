@@ -1,19 +1,14 @@
 # Noeticards
 
-To start your Phoenix server:
+## Priorities
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
-
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
-
-## Learn more
-
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+1. Enable CRUD operations for cards and decks.
+  1. Create database tables for cards and decks
+  2. Create contexts and schemas for cards and decks
+  3. Write tests
+2. Create liveviews for cards and decks - do these once for each
+  1. Create route
+  2. Create controller
+  3. Create HEEX template
+  4. Write tests
+3. Look into login and user auth (stretch)
