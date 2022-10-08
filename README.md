@@ -14,4 +14,5 @@
     2. Create controller
     3. Create HEEX template
     4. Write tests
-3. Look into login and user auth (stretch)
+3. Create quiz functionality for a given deck.
+4. Look into login and user auth (stretch)
