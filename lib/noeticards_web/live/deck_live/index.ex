@@ -14,7 +14,7 @@ defmodule NoeticardsWeb.DeckLive.Index do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
-  defp apply_action(socket, :edit, %{"id" => id}) do
+  defp apply_action(socket, :edit, %{"deck_id" => id}) do
     socket
     |> assign(:page_title, "Edit Deck")
     |> assign(:deck, Decks.get_deck!(id))
