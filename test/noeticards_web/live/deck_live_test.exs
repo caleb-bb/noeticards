@@ -48,7 +48,9 @@ defmodule NoeticardsWeb.DeckLiveTest do
     test "updates deck in listing", %{conn: conn, deck: deck} do
       {:ok, index_live, _html} = live(conn, Routes.deck_index_path(conn, :index))
 
-      assert index_live |> element("#deck-#{deck.id} a", "Edit") |> render_click() =~
+      assert index_live
+             |> element("#deck-#{deck.id} a", "Edit")
+             |> render_click() =~
                "Edit Deck"
 
       assert_patch(index_live, Routes.deck_index_path(conn, :edit, deck))
