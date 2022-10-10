@@ -2,7 +2,7 @@ defmodule NoeticardsWeb.DeckLive.Index do
   use NoeticardsWeb, :live_view
 
   alias Noeticards.Decks
-  alias Noeticards.Decks.Deck
+  alias NoeticardsSchemas.Deck
 
   @impl true
   def mount(_params, _session, socket) do
