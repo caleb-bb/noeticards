@@ -3,6 +3,7 @@ defmodule NoeticardsSchemas.Card do
 
   use Ecto.Schema
   import Ecto.Changeset
+  import Ecto.Query
 
   schema "cards" do
     field :name, :string

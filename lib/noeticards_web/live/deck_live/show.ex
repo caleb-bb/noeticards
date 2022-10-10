@@ -1,6 +1,7 @@
 defmodule NoeticardsWeb.DeckLive.Show do
   use NoeticardsWeb, :live_view
 
+  alias Noeticards.Cards
   alias Noeticards.Decks
 
   @impl true
@@ -13,7 +14,7 @@ defmodule NoeticardsWeb.DeckLive.Show do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:deck, Decks.get_deck!(id))}
+     |> assign(:deck, Decks.get_deck_with_cards!(id))}
   end
 
   defp page_title(:show), do: "Show Deck"

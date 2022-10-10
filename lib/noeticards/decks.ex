@@ -1,7 +1,7 @@
 defmodule Noeticards.Decks do
   @moduledoc "Decks context"
   alias NoeticardsSchemas, as: Schemas
-  alias Noeticards.Decks.Deck
+  alias NoeticardsSchemas.Deck
   alias Noeticards.Repo
 
   def add_new_deck(params) do
@@ -38,6 +38,8 @@ defmodule Noeticards.Decks do
 
   """
   def get_deck!(id), do: Repo.get!(Deck, id)
+
+  def get_deck_with_cards!(id), do: get_deck!(id) |> Repo.preload(:cards)
 
   @doc """
   Creates a deck.

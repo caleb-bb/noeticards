@@ -13,12 +13,16 @@
   </.modal>
 <% end %>
 
-<ul>
-
-  <li>
     <strong>Name:</strong>
     <%= @deck.name %>
-  </li>
+<ul>
+
+
+  <%= for card <- @deck.cards do %>
+      <li>
+        <%= card.front_text %>
+        </li>
+      <% end %>
 
 </ul>
 
