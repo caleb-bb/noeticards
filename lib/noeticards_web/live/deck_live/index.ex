@@ -14,12 +14,6 @@ defmodule NoeticardsWeb.DeckLive.Index do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
-  defp apply_action(socket, :edit, %{"deck_id" => id}) do
-    socket
-    |> assign(:page_title, "Edit Deck")
-    |> assign(:deck, Decks.get_deck!(id))
-  end
-
   defp apply_action(socket, :new, _params) do
     socket
     |> assign(:page_title, "New Deck")
@@ -35,7 +29,7 @@ defmodule NoeticardsWeb.DeckLive.Index do
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
     deck = Decks.get_deck!(id)
-    {:ok, _} = Decks.delete_deck(deck)
+    {:ok, _} = Decks.delete_deck(deck) |> IO.inspect(label: "return from delete_deck")
 
     {:noreply, assign(socket, :decks, list_decks())}
   end

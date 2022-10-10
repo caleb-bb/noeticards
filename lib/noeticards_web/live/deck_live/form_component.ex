@@ -1,6 +1,5 @@
 defmodule NoeticardsWeb.DeckLive.FormComponent do
   use NoeticardsWeb, :live_component
-
   alias Noeticards.Decks
 
   @impl true

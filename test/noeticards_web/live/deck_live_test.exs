@@ -45,30 +45,6 @@ defmodule NoeticardsWeb.DeckLiveTest do
       assert html =~ "some name"
     end
 
-    test "updates deck in listing", %{conn: conn, deck: deck} do
-      {:ok, index_live, _html} = live(conn, Routes.deck_index_path(conn, :index))
-
-      assert index_live
-             |> element("#deck-#{deck.id} a", "Edit")
-             |> render_click() =~
-               "Edit Deck"
-
-      assert_patch(index_live, Routes.deck_index_path(conn, :edit, deck))
-
-      assert index_live
-             |> form("#deck-form", deck: @invalid_attrs)
-             |> render_change() =~ "can&#39;t be blank"
-
-      {:ok, _, html} =
-        index_live
-        |> form("#deck-form", deck: @update_attrs)
-        |> render_submit()
-        |> follow_redirect(conn, Routes.deck_index_path(conn, :index))
-
-      assert html =~ "Deck updated successfully"
-      assert html =~ "some updated name"
-    end
-
     test "deletes deck in listing", %{conn: conn, deck: deck} do
       {:ok, index_live, _html} = live(conn, Routes.deck_index_path(conn, :index))
 

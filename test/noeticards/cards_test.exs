@@ -6,7 +6,7 @@ defmodule Noeticards.CardsTest do
   alias NoeticardsSchemas.Card
   alias NoeticardsSchemas.Deck
 
-  describe "add_new_card/1" do
+  describe "create_card/1" do
     test "it returns an :ok tuple with valid params" do
       %Deck{id: deck_id} = insert(:deck)
 
@@ -17,7 +17,7 @@ defmodule Noeticards.CardsTest do
         deck_id: deck_id
       }
 
-      return_value = Cards.add_new_card(params)
+      return_value = Cards.create_card(params)
 
       assert {:ok,
               %Card{
@@ -31,7 +31,7 @@ defmodule Noeticards.CardsTest do
     test "it returns an :error tuple with invalid params" do
       params = %{}
 
-      return_value = Cards.add_new_card(params)
+      return_value = Cards.create_card(params)
 
       assert {:error, changeset} = return_value
 

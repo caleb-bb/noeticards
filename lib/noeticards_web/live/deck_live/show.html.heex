@@ -13,18 +13,35 @@
   </.modal>
 <% end %>
 
+<%= if @live_action in [:add_card] do %>
+  <.modal return_to={Routes.deck_show_path(@socket, :show, @deck)}>
+    <.live_component
+      module={NoeticardsWeb.DeckLive.AddCardComponent}
+      id={@deck.id}
+      title={@page_title}
+      action={@live_action}
+      return_to={Routes.deck_show_path(@socket, :show, @deck)}
+    />
+  </.modal>
+<% end %>
+
     <strong>Name:</strong>
     <%= @deck.name %>
 <ul>
 
 
-  <%= for card <- @deck.cards do %>
+  <%= for card <- @cards do %>
       <li>
-        <%= card.front_text %>
+        <%= card.name %>
+        <div>
+          <%= card.front_text %>,
+          <%= card.back_text %>
+          </div>
         </li>
       <% end %>
 
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.deck_show_path(@socket, :edit, @deck), class: "button" %></span> |
+<span><%= live_patch "Edit", to: Routes.deck_show_path(@socket, :edit, @deck), class: "button" %></span>
+<span><%= live_patch "Add Card", to: Routes.deck_show_path(@socket, :add_card, @deck), class: "button" %></span> |
 <span><%= live_redirect "Back", to: Routes.deck_index_path(@socket, :index) %></span>
