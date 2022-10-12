@@ -17,6 +17,8 @@
 3. Enable adding, removing, and editing cards in/to a deck.
     1. List all cards in a deck on `show.html.heex`
     2. Create an "Add New Card" button
+        1. Fix the "validate" event handler
+        2. Fix the "save" event handler
     3. Make cards clickable so that they can be removed or edited
 4. Create quiz functionality for a given deck
 5. Look into login and user auth (stretch)

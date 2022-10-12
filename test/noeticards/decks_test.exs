@@ -1,6 +1,7 @@
 defmodule Noeticards.DecksTest do
   @moduledoc "Test for Decks context"
   use Noeticards.DataCase
+  import Noeticards.DecksFixtures
   alias Noeticards.Decks
   alias NoeticardsSchemas.Deck
 
@@ -23,33 +24,41 @@ defmodule Noeticards.DecksTest do
     end
   end
 
-  describe "decks" do
-    import Noeticards.DecksFixtures
+  @invalid_attrs %{name: nil}
 
-    @invalid_attrs %{name: nil}
-
-    test "list_decks/0 returns all decks" do
+  describe "list decks/0" do
+    test "returns all decks" do
       deck = deck_fixture()
       assert Decks.list_decks() == [deck]
     end
+  end
 
-    test "get_deck!/1 returns the deck with given id" do
+  describe "get_deck!/1" do
+    test "returns the deck with given id" do
       deck = deck_fixture()
       assert Decks.get_deck!(deck.id) == deck
     end
 
-    test "create_deck/1 with valid data creates a deck" do
+    test "raises on bad id" do
+      assert_raise Ecto.NoResultsError, fn -> Decks.get_deck!(7237) end
+    end
+  end
+
+  describe "create_deck/1" do
+    test "creates a deck with valid data" do
       valid_attrs = %{name: "some name"}
 
       assert {:ok, %Deck{} = deck} = Decks.create_deck(valid_attrs)
       assert deck.name == "some name"
     end
 
-    test "create_deck/1 with invalid data returns error changeset" do
+    test "returns error changeset with invalid data" do
       assert {:error, %Ecto.Changeset{}} = Decks.create_deck(@invalid_attrs)
     end
+  end
 
-    test "update_deck/2 with valid data updates the deck" do
+  describe "update_deck/2" do
+    test "updates the deck with valid data" do
       deck = deck_fixture()
       update_attrs = %{name: "some updated name"}
 
@@ -57,19 +66,23 @@ defmodule Noeticards.DecksTest do
       assert deck.name == "some updated name"
     end
 
-    test "update_deck/2 with invalid data returns error changeset" do
+    test "returns error changeset with invalid data" do
       deck = deck_fixture()
       assert {:error, %Ecto.Changeset{}} = Decks.update_deck(deck, @invalid_attrs)
       assert deck == Decks.get_deck!(deck.id)
     end
+  end
 
-    test "delete_deck/1 deletes the deck" do
+  describe "delete_deck/1" do
+    test "deletes the deck" do
       deck = deck_fixture()
       assert {:ok, %Deck{}} = Decks.delete_deck(deck)
       assert_raise Ecto.NoResultsError, fn -> Decks.get_deck!(deck.id) end
     end
+  end
 
-    test "change_deck/1 returns a deck changeset" do
+  describe "change_deck/1" do
+    test "returns a deck changeset" do
       deck = deck_fixture()
       assert %Ecto.Changeset{} = Decks.change_deck(deck)
     end

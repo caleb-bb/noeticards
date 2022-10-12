@@ -22,9 +22,9 @@ defmodule NoeticardsWeb.Router do
     live "/decks", DeckLive.Index, :index
     live "/decks/:deck_id/show", DeckLive.Show, :show
     live "/decks/:deck_id/edit", DeckLive.Show, :edit
+    live "/decks/:deck_id/add_card", DeckLive.Show, :add_card
     live "/decks/:deck_id/index_edit", DeckLive.Index, :edit
     live "/decks/new", DeckLive.Index, :new
-
   end
 
   # Other scopes may use custom stacks.

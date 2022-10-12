@@ -6,7 +6,7 @@ defmodule NoeticardsSchemas.Deck do
 
   schema "decks" do
     field :name, :string
-    has_many :cards, NoeticardsSchemas.Card
+    has_many :cards, NoeticardsSchemas.Card, on_delete: :delete_all
 
     timestamps()
   end

@@ -1,9 +1,13 @@
 defmodule Noeticards.Decks do
   @moduledoc "Decks context"
+
   alias NoeticardsSchemas, as: Schemas
   alias NoeticardsSchemas.Deck
   alias Noeticards.Repo
 
+  @doc """
+  Add a new deck to the db created from empty struct and changeset.
+  """
   def add_new_deck(params) do
     %Deck{}
     |> Deck.changeset(params)
@@ -38,8 +42,6 @@ defmodule Noeticards.Decks do
 
   """
   def get_deck!(id), do: Repo.get!(Deck, id)
-
-  def get_deck_with_cards!(id), do: get_deck!(id) |> Repo.preload(:cards)
 
   @doc """
   Creates a deck.
