@@ -29,7 +29,7 @@ defmodule NoeticardsWeb.DeckLive.Index do
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
     deck = Decks.get_deck!(id)
-    {:ok, _} = Decks.delete_deck(deck) |> IO.inspect(label: "return from delete_deck")
+    {:ok, _} = Decks.delete_deck(deck)
 
     {:noreply, assign(socket, :decks, list_decks())}
   end
