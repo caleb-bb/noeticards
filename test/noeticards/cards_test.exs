@@ -3,6 +3,7 @@ defmodule Noeticards.CardsTest do
   use Noeticards.DataCase
   import Noeticards.Factory
   alias Noeticards.Cards
+  alias Noeticards.TestUtils
   alias NoeticardsSchemas.Card
   alias NoeticardsSchemas.Deck
 
@@ -49,8 +50,8 @@ defmodule Noeticards.CardsTest do
       first_deck = insert(:deck)
       second_deck = insert(:deck)
 
-      insert_this_many(3, :card, %{deck: first_deck})
-      insert_this_many(7, :card, %{deck: second_deck})
+      TestUtils.insert_this_many(3, :card, %{deck: first_deck})
+      TestUtils.insert_this_many(7, :card, %{deck: second_deck})
 
       cards_in_first_deck = Cards.cards_in_deck!(first_deck.id)
       cards_in_second_deck = Cards.cards_in_deck!(second_deck.id)
@@ -67,10 +68,19 @@ defmodule Noeticards.CardsTest do
     end
   end
 
-  def insert_this_many(how_many, thing_to_insert, params \\ %{})
-      when how_many >= 1 and thing_to_insert in [:card, :deck] do
-    for _count <- 1..how_many do
-      insert(thing_to_insert, params)
+  describe "delete_card/1" do
+    test "deletes a card when given a valid id" do
+      %Card{id: id} = insert(:card)
+      Cards.delete_card!(id)
+    end
+
+    test "raises on a nonexistent id" do
+      card = insert(:card)
+      Cards.delete_card!(card.id)
+
+      assert_raise(Ecto.StaleEntryError, fn ->
+        Cards.delete_card!(card.id)
+      end)
     end
   end
 end

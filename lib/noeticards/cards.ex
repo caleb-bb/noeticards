@@ -1,9 +1,6 @@
 defmodule Noeticards.Cards do
   @moduledoc "Cards context"
 
-  import Ecto.Changeset
-  import Ecto.Query
-
   alias NoeticardsSchemas.Card
   alias Noeticards.Repo
 
@@ -14,6 +11,13 @@ defmodule Noeticards.Cards do
     %Card{}
     |> Card.changeset(params)
     |> Repo.insert()
+  end
+
+  @doc """
+  Deletes a card from the db.
+  """
+  def delete_card!(id) do
+    Repo.delete!(%Card{id: id})
   end
 
   @doc """

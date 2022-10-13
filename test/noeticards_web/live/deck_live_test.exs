@@ -1,8 +1,9 @@
 defmodule NoeticardsWeb.DeckLiveTest do
   use NoeticardsWeb.ConnCase
 
-  import Phoenix.LiveViewTest
   import Noeticards.DecksFixtures
+  import Noeticards.Factory
+  import Phoenix.LiveViewTest
 
   @create_attrs %{name: "some name"}
   @update_attrs %{name: "some updated name"}
@@ -83,6 +84,24 @@ defmodule NoeticardsWeb.DeckLiveTest do
 
       assert html =~ "Deck updated successfully"
       assert html =~ "some updated name"
+    end
+  end
+
+  describe "User can delete cards" do
+    test "opens deck show page and deletes a card", %{conn: conn} do
+      deck = insert(:deck)
+      insert(:card, deck: deck)
+      {:ok, view, _html} = live(conn, Routes.deck_show_path(conn, :show, deck))
+
+      assert has_element?(view, "[data-role=\"card-info\"]")
+
+      view
+      |> element("a", "Delete")
+      |> render_click()
+
+      {:ok, view, _html} = live(conn, Routes.deck_show_path(conn, :show, deck))
+
+      refute has_element?(view, "[data-role=\"card-info\"]")
     end
   end
 end
