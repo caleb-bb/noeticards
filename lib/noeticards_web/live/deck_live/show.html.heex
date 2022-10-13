@@ -38,6 +38,9 @@
           <%= card.front_text %>,
           <%= card.back_text %>
           </div>
+            <div>
+              <%= live_patch "Delete", to: Routes.deck_show_path(@socket, :delete_card, card), class: "button", data_confirm: "Are you sure?" %>
+            </div>
         </li>
       </div>
       <% end %>
