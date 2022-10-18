@@ -25,6 +25,22 @@
   </.modal>
 <% end %>
 
+<%= if @live_action in [:quiz] do %>
+  <.modal return_to={Routes.deck_show_path(@socket, :show, @deck)}>
+    <.live_component
+      module={NoeticardsWeb.DeckLive.QuizComponent}
+      id={@deck.id}
+      title={@page_title}
+      action={@live_action}
+      cards={@cards}
+      current_card={0}
+      side={:front_text}
+      deck_size={@deck_size}
+      return_to={Routes.deck_show_path(@socket, :show, @deck)}
+    />
+  </.modal>
+<% end %>
+
     <strong>Name:</strong>
     <%= @deck.name %>
 <ul>
@@ -47,6 +63,9 @@
 
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.deck_show_path(@socket, :edit, @deck), class: "button" %></span>
+<span><%= live_patch "Edit", to: Routes.deck_show_path(@socket, :edit, @deck), class: "button" %></span> |
+<%= if Enum.count(@cards) > 0 do %>
+  <span><%= live_patch "Quiz", to: Routes.deck_show_path(@socket, :quiz, @deck), class: "button" %></span> |
+<% end %>
 <span><%= live_patch "Add Card", to: Routes.deck_show_path(@socket, :add_card, @deck), class: "button" %></span> |
 <span><%= live_redirect "Back", to: Routes.deck_index_path(@socket, :index) %></span>
