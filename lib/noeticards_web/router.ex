@@ -20,13 +20,14 @@ defmodule NoeticardsWeb.Router do
     get "/", PageController, :index
 
     live "/decks", DeckLive.Index, :index
+    live "/decks/:deck_id/index_edit", DeckLive.Index, :edit
+    live "/decks/new", DeckLive.Index, :new
+    live "/decks/:deck_id/delete", DeckLive.Index, :delete
     live "/decks/:deck_id/show", DeckLive.Show, :show
     live "/decks/:deck_id/edit", DeckLive.Show, :edit
     live "/decks/:deck_id/add_card", DeckLive.Show, :add_card
     live "/decks/:card_id/delete_card", DeckLive.Show, :delete_card
-    live "/decks/:deck_id/index_edit", DeckLive.Index, :edit
-    live "/decks/new", DeckLive.Index, :new
-    live "/decks/:deck_id/delete", DeckLive.Index, :delete
+    live "/decks/:deck_id/quiz", DeckLive.Show, :quiz
   end
 
   # Other scopes may use custom stacks.

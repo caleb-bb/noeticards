@@ -16,7 +16,8 @@ defmodule NoeticardsWeb.DeckLive.Show do
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
      |> assign_deck(id)
-     |> assign_cards(id)}
+     |> assign_cards(id)
+     |> assign_deck_size()}
   end
 
   @impl true
@@ -33,7 +34,13 @@ defmodule NoeticardsWeb.DeckLive.Show do
   defp page_title(:show), do: "Show Deck"
   defp page_title(:edit), do: "Edit Deck"
   defp page_title(:add_card), do: "Add a Card"
+  defp page_title(:quiz), do: "Quiz Time!"
 
   defp assign_deck(socket, id), do: assign(socket, :deck, Decks.get_deck!(id))
   defp assign_cards(socket, id), do: assign(socket, :cards, Cards.cards_in_deck!(id))
+
+  defp assign_deck_size(%{assigns: %{cards: cards}} = socket) do
+    deck_size = Enum.count(cards)
+    assign(socket, :deck_size, socket.assigns.cards |> Enum.count())
+  end
 end
