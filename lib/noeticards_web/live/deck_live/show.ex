@@ -7,8 +7,12 @@ defmodule NoeticardsWeb.DeckLive.Show do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, socket}
+    {:ok, socket |> assign(filter: "")}
   end
+
+  @impl true
+  def handle_event("search", %{"search_field" => %{"filter" => filter}}, socket),
+    do: {:noreply, assign(socket, filter: filter)}
 
   @impl true
   def handle_params(%{"deck_id" => id}, _, socket) do
@@ -35,6 +39,11 @@ defmodule NoeticardsWeb.DeckLive.Show do
   defp page_title(:edit), do: "Edit Deck"
   defp page_title(:add_card), do: "Add a Card"
   defp page_title(:quiz), do: "Quiz Time!"
+
+  defp apply_filter(card, filter) do
+    text = card.front_text <> card.back_text <> card.name
+    String.downcase(text) |> String.contains?(String.downcase(filter))
+  end
 
   defp assign_deck(socket, id), do: assign(socket, :deck, Decks.get_deck!(id))
   defp assign_cards(socket, id), do: assign(socket, :cards, Cards.cards_in_deck!(id))

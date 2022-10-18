@@ -41,12 +41,19 @@
   </.modal>
 <% end %>
 
-    <strong>Name:</strong>
-    <%= @deck.name %>
+    <div><strong>Name:</strong>
+    <%= @deck.name %></div>
+    <div>
+    <form :if={@cards != []} phx-change="search" class="p-6">
+    <%= text_input(:search_field, :filter, placeholder: "Search for a card",
+        phx_hook: "Autofocus"
+        ) %>
+    </form>
+</div>
 <ul>
 
 
-  <%= for card <- @cards do %>
+  <%= for card <- @cards, apply_filter(card, @filter) do %>
       <div data-role="card-info">
       <li>
         <%= card.name %>
