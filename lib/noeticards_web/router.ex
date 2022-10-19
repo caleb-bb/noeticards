@@ -17,9 +17,7 @@ defmodule NoeticardsWeb.Router do
   scope "/", NoeticardsWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
-
-    live "/decks", DeckLive.Index, :index
+    live "/", DeckLive.Index, :index
     live "/decks/:deck_id/index_edit", DeckLive.Index, :edit
     live "/decks/new", DeckLive.Index, :new
     live "/decks/:deck_id/delete", DeckLive.Index, :delete
