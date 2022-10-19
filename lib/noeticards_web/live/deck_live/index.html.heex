@@ -1,4 +1,4 @@
-<h1>Listing Decks</h1>
+<h1 class="flex justify-center text-3xl font-bold underline">Listing Decks</h1>
 
 <%= if @live_action in [:new] do %>
   <.modal return_to={Routes.deck_index_path(@socket, :index)}>
@@ -32,7 +32,7 @@
         </td>
       </tr>
     <% end %>
-          <span><%= live_patch "New Deck", to: Routes.deck_index_path(@socket, :new) %></span>
+          <span class="flex justify-center"><%= live_patch "New Deck", to: Routes.deck_index_path(@socket, :new) %></span>
   </tbody>
 </table>
 
