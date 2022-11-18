@@ -21,6 +21,8 @@
     <%= text_input f, :back_text %>
     <%= error_tag f, :back_text %>
 
+    <%= hidden_input f, :deck_id, value: @deck_id %>
+
     <div>
       <%= submit "Save", phx_disable_with: "Saving..." %>
     </div>
