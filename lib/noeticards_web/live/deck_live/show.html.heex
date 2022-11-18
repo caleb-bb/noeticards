@@ -1,4 +1,4 @@
-<h1>Show Deck</h1>
+<h1 class="flex justify-center">Show Deck</h1>
 
 <%= if @live_action in [:edit] do %>
   <.modal return_to={Routes.deck_show_path(@socket, :show, @deck)}>
@@ -41,7 +41,7 @@
   </.modal>
 <% end %>
 
-    <div><strong>Name:</strong>
+    <div class="flex justify-center"><strong>Name:</strong>
     <%= @deck.name %></div>
     <div>
     <form :if={@cards != []} phx-change="search" class="p-6">
@@ -50,29 +50,26 @@
         ) %>
     </form>
 </div>
-<ul>
 
-
+<ul class="flex flex-col justify-around items-center">
   <%= for card <- @cards, apply_filter(card, @filter) do %>
-      <div data-role="card-info">
-      <li>
-        <%= card.name %>
-        <div>
-          <%= card.front_text %>,
-          <%= card.back_text %>
-          </div>
-            <div>
-              <%= live_patch "Delete", to: Routes.deck_show_path(@socket, :delete_card, card), class: "button", data_confirm: "Are you sure?" %>
+      <div class="card w-96 bg-purple-900 shadow-xl my-5 bg-color-gray flex-col items-center" data-role="card-info">
+        <li>
+          <div class="card-title flex-row justify-center"><%= card.name %></div>
+          <div>
+            <%= card.front_text %>,
+            <%= card.back_text %>
+                <%= live_patch "", to: Routes.deck_show_path(@socket, :delete_card, card), class: "card-actions fa fa-trash", data_confirm: "Are you sure?" %>
             </div>
-        </li>
+          </li>
       </div>
       <% end %>
-
 </ul>
-
-<span><%= live_patch "Edit", to: Routes.deck_show_path(@socket, :edit, @deck), class: "button" %></span> |
-<%= if Enum.count(@cards) > 0 do %>
-  <span><%= live_patch "Quiz", to: Routes.deck_show_path(@socket, :quiz, @deck), class: "button" %></span> |
-<% end %>
-<span><%= live_patch "Add Card", to: Routes.deck_show_path(@socket, :add_card, @deck), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.deck_index_path(@socket, :index) %></span>
+<div class="flex justify-center">
+  <span class="mx-4"><%= live_patch "", to: Routes.deck_show_path(@socket, :edit, @deck), class: "fa fa-pencil " %></span> |
+  <%= if Enum.count(@cards) > 0 do %>
+    <span class="mx-4"><%= live_patch "", to: Routes.deck_show_path(@socket, :quiz, @deck), class: "fa-solid fa-question" %></span> |
+  <% end %>
+  <span class="mx-4"><%= live_patch "", to: Routes.deck_show_path(@socket, :add_card, @deck), class: "fa-solid fa-plus" %></span> |
+  <span class="mx-4"><%= live_redirect "", to: Routes.deck_index_path(@socket, :index), class: "fa-solid fa-left-long" %></span>
+</div>

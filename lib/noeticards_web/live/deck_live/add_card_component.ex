@@ -10,7 +10,8 @@ defmodule NoeticardsWeb.DeckLive.AddCardComponent do
     {:ok,
      socket
      |> assign(assigns)
-     |> assign(:changeset, changeset)}
+     |> assign(:changeset, changeset)
+     |> assign(:deck_id, assigns.id)}
   end
 
   @impl true
@@ -23,12 +24,10 @@ defmodule NoeticardsWeb.DeckLive.AddCardComponent do
     {:noreply, assign(socket, :changeset, changeset)}
   end
 
-  def handle_event("save", %{"card" => card_params}, %{assigns: assigns} = socket) do
-    id_params =
-      card_params
-      |> Map.merge(%{"deck_id" => assigns.deck_id})
+  def handle_event("save", %{"card" => params}, %{assigns: assigns} = socket) do
+    IO.inspect(params, label: "here are the params in the event_handler")
 
-    case Cards.create_card(id_params) do
+    case Cards.create_card(params) do
       {:ok, _card} ->
         {:noreply,
          socket

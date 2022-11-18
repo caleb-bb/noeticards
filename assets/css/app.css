@@ -5,6 +5,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  color: lavender;
+}
+
 /* Alerts and form errors used by phx.new */
 .alert {
   padding: 15px;
