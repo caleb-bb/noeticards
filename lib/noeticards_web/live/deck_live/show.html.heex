@@ -53,7 +53,7 @@
 
 <ul class="flex flex-col justify-around items-center">
   <%= for card <- @cards, apply_filter(card, @filter) do %>
-      <div class="card w-96 bg-purple-900 shadow-xl my-5 bg-color-gray flex-col items-center" data-role="card-info">
+      <div class="card w-96 bg-primary shadow-xl my-5 bg-color-gray flex-col items-center" data-role="card-info">
         <li>
           <div class="card-title flex-row justify-center"><%= card.name %></div>
           <div>
